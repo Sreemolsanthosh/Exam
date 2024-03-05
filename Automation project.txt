@@ -1,0 +1,176 @@
+package basepkg;
+
+import java.time.Duration;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+
+public class Pepperfrybaseclass {
+	public static WebDriver driver;
+	
+	@BeforeClass
+	public void preCondition()
+	{
+		driver=new ChromeDriver(); 
+		driver.get("https://www.pepperfry.com/");
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
+		
+	}
+	
+	@AfterClass
+	public void postCondition()
+	{
+		driver.quit();
+	}
+
+}
+package pepperfrypagepkg;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class Pepperfrypgm {
+	
+	WebDriver driver;
+	
+	@FindBy(xpath="//*[@id=\"Mattresses\"]/a")
+	WebElement mattresses;  //mouse over
+	
+	@FindBy(xpath="//*[@id=\"card-content\"]/h3/a")
+	WebElement kingmattresses;
+	
+	@FindBy(xpath="/html/body/app-root/main/app-category/pf-clip/div/div[1]/div[2]/div/pf-clip-deal-block/div/div/div/div[2]/pf-product-card/div/div[2]/h3/a/span")
+	WebElement firstmattress;
+	
+	@FindBy(xpath="//*[@id=\"Button\"]/div/span")
+	WebElement firsttocart;
+		
+	@FindBy(xpath="//*[@id=\"Lamps & Lighting\"]/a")
+	WebElement lamps;  //mouseover
+	
+	@FindBy(xpath="//*[@id=\"meta-Furniture\"]/div/div/div/div/div[5]/ul[1]/li[5]/a")
+	WebElement gardenlights;
+	
+	@FindBy(xpath="//*[@id=\"scroller\"]/div/div[1]/div/pf-clip-product-card/div/div[2]/div/div[1]/h3")
+	WebElement firstlight;
+	
+	@FindBy(xpath="//*[@id=\"Button\"]/div/span")
+	WebElement lighttocart;
+	
+	@FindBy(xpath="//*[@id=\"Furniture\"]/a")
+	WebElement furniture; //click
+	
+	@FindBy(xpath="//*[@id=\"card-content\"]/h3/a")
+	WebElement wardrobes;
+	
+	@FindBy(xpath="/html/body/app-root/main/app-category/pf-clip/div/div[1]/div[2]/div/pf-clip-deal-block/div/div/div/div[3]/pf-product-card/div/div[2]/h3/a/span")
+	WebElement secondwardrobe;
+	
+	@FindBy(xpath="//*[@id=\"Button\"]/div/span")
+	WebElement wardrobetocart;
+	
+	
+    public Pepperfrypgm(WebDriver driver)
+    {
+	this.driver=driver;
+	PageFactory.initElements(driver,this);
+    }
+    
+    public void test1()
+    {
+       Actions act=new Actions(driver);
+ 	    act.moveToElement(mattresses);  
+ 	    act.perform();
+    	mattresses.click();
+    	kingmattresses.click();
+    	firstmattress.click();
+    	firsttocart.click();
+    }
+    public void test2()
+    {
+    	furniture.click();
+    	wardrobes.click();
+    	secondwardrobe.click();
+    	wardrobetocart.click();
+    	
+    }
+    
+    public void test3()
+    {
+    	  Actions act=new Actions(driver);
+  	      act.moveToElement(lamps);  
+  		  act.perform();
+  		  gardenlights.click();
+  		  firstlight.click();
+  		  lighttocart.click();
+    }
+    
+    public void test4()         //checking 
+    {
+    	String src=driver.getPageSource();
+    	if(src.contains("Furnishings"))
+    	{
+    		System.out.println("It is present");
+    	}
+    	else
+    	{
+    		System.out.println("It is not present");
+    	}
+    }
+    
+    public void test5()         //link fetching
+    {
+    	List<WebElement> linkdetails=driver.findElements(By.tagName("a"));
+    	System.out.println("total no of links="+linkdetails.size());
+    	for(WebElement e:linkdetails)
+    	{
+    		
+    		System.out.println(e.getText());                
+    		System.out.println(e.getAttribute("href")); 
+    	}
+    }
+    
+}
+package pepperfrytestpgm;
+
+import org.testng.annotations.Test;
+
+import basepkg.Pepperfrybaseclass;
+import pepperfrypagepkg.Pepperfrypgm;
+
+public class Pepperfrytesting extends Pepperfrybaseclass {
+	@Test
+	
+	public void testing()
+	{
+		Pepperfrypgm pf=new Pepperfrypgm(driver);
+		pf.test1();
+		pf.test2();
+		pf.test3();
+		pf.test4();
+		pf.test5();
+		
+	}
+	
+}
+    
+    
+    
+    	
+    
+
+     
+	
+	
+	
+
+
