@@ -93,23 +93,26 @@ public class Meeshopgm {
 
 }
 
-package testjanasyapkg;
+package meeshotestpkg;
 
 import org.testng.annotations.Test;
 
-import pagejanasyapkg.Janasyapgm;
+import meeshopagepkg.Meeshopgm;
 
-public class Janasyatestingpgm extends Baseclassjanasya {
-	@Test
+public class Meeshotesting extends Meeshobaseclass{
+	
+	@Test 
 	public void testing()
 	{
-		Janasyapgm jp=new Janasyapgm(driver);
-		jp.test1();
-		jp.test2();
-		jp.test3();
+		Meeshopgm mp=new Meeshopgm(driver);
+		mp.test1();
+		mp.test2("saree");
+		mp.test3();
+		mp.test4();
+		mp.test5();
 		
 	}
-	
 
 }
+
 
