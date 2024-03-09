@@ -1,0 +1,107 @@
+
+package meeshotestpkg;
+
+import java.time.Duration;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeClass;
+
+public class Meeshobaseclass {
+	
+	public static WebDriver driver;
+	
+	@BeforeClass
+	public void setUp() throws InterruptedException
+	{
+		driver=new ChromeDriver();
+		driver.get("https://www.meesho.com/");
+		Thread.sleep(3000);
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+	}
+	
+
+}
+package meeshopagepkg;
+
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class Meeshopgm {
+	
+	WebDriver driver;
+	
+	@FindBy(xpath="//*[@id=\"__next\"]/div[2]/div[1]/div/div[2]/div/input")
+	WebElement search;
+	
+	@FindBy(xpath="//*[@id=\"__next\"]/div[2]/div[4]/div/div[5]/span")
+	WebElement men;
+	
+	@FindBy (xpath="//*[@id=\"__next\"]/div[2]/div[4]/div/div[6]/div/div[3]/a[5]/p")
+	WebElement jewellery;
+	
+	@FindBy(xpath="//*[@id=\"__next\"]/div[4]/div[2]/div/div/div[2]/div[2]/div[24]/div[15]/div[2]/div/span[3]/a")
+	WebElement haircolor;
+	
+	public Meeshopgm(WebDriver driver)
+	{
+		this.driver=driver;
+		PageFactory.initElements(driver, this);
+	}
+	
+	public void test1()
+	{
+		search.click();
+	}
+	public void test2(String values)
+	{
+		search.sendKeys("saree");
+		
+	}
+	public void test3()
+	{
+		men.click();
+		jewellery.click();
+	}
+	
+	public void test4()
+	{
+		String actualtitle="meesho.com";
+		String exp=driver.getTitle();
+		if(actualtitle.equals(exp))
+		{
+			System.out.println("Title is same");
+		}
+		else
+		{
+			System.out.println("Title is not same");
+		}
+	
+	
+
+}
+
+package testjanasyapkg;
+
+import org.testng.annotations.Test;
+
+import pagejanasyapkg.Janasyapgm;
+
+public class Janasyatestingpgm extends Baseclassjanasya {
+	@Test
+	public void testing()
+	{
+		Janasyapgm jp=new Janasyapgm(driver);
+		jp.test1();
+		jp.test2();
+		jp.test3();
+		
+	}
+	
+
+}
+
