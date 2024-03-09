@@ -44,7 +44,7 @@ public class Meeshopgm {
 	@FindBy (xpath="//*[@id=\"__next\"]/div[2]/div[4]/div/div[6]/div/div[3]/a[5]/p")
 	WebElement jewellery;
 	
-	@FindBy(xpath="//*[@id=\"__next\"]/div[4]/div[2]/div/div/div[2]/div[2]/div[24]/div[15]/div[2]/div/span[3]/a")
+	@FindBy(xpath="//*[@id="__next"]/div[3]/div[2]/div/div/footer/div/div[2]/div[2]/div[2]/div[15]/div[2]/div/span[3]/a")
 	WebElement haircolor;
 	
 	public Meeshopgm(WebDriver driver)
